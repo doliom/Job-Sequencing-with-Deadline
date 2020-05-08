@@ -1,22 +1,26 @@
-def Greedy(w, d, p):
-    solution = [] # ініціалізація розкладу
-    c = 0 # момент завершення робіт, що вєе у розкладі
-    lateness = d # список запізнень для кожної роботи
-    goalFunc = 0 # цільова функція
-    i = 0
-    while(i != len(lateness)):
-        currentIndex = lateness.index(min(lateness))
-        solution.append(currentIndex + 1)
+class Greedy:
+    def __init__(self, w, d, p):
+        self.w = w
+        self.d = d
+        self.p = p
+        self.lateness = d
+        self.goalFunc = 0
+        self.c = 0 #запізнення
 
-        print(solution)
+    def greedySearch(self):
+        i = 0
+        solution = []
+        while (i != len(self.lateness)):
+            currentIndex = self.lateness.index(min(self.lateness))
+            solution.append(currentIndex + 1)
+            self.c += self.p[currentIndex]
+            self.takeGoalFunc(currentIndex)
+            self.lateness = list(map(lambda x: x - self.c, self.lateness))
+            self.lateness[currentIndex] = 100000
+            i = i + 1
+        return solution
 
-        c += p[currentIndex]
-        T = max(0, c-d[currentIndex])
-        func = func + T*w[currentIndex]
-        print(func)
+    def takeGoalFunc(self, currentIndex):
+        T = max(0, self.c - self.d[currentIndex])
+        self.goalFunc = self.goalFunc + T * self.w[currentIndex]
 
-        lateness = list(map(lambda x: x - c, lateness))
-        lateness[currentIndex] = 100000
-        i = i+1
-
-    return solution
