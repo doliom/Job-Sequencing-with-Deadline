@@ -1,35 +1,43 @@
+from app.node import Node
+
 class BranchAndBound:
-    def __init__(self, w, d, p):
-        self.w = w
-        self.d = d
-        self.p = p
+    def __init__(self, w_list, d_list, p_list):
+        self.w_list = w_list
+        self.d_list = d_list
+        self.p_list = p_list
+        self.jobs_list = [i for i in range(1, len(w_list)+1)]
         self.lower = 0
-        self.jobsIndex = [i for i in range(0, len(w))]
 
-    def bbm(self):
+    def BBM(self):
         activeSet = []
-        visited = ['']
-        currentLower = 0
-        self.makeChildren(visited)
-        # while activeSet:
-        #     for node in activeSet:
-        #         print("sdf")
+        solution = []
+        Lower = 0 #нижня оцінка
+        depth = 0
+        currentOpt = 0 #поточний оптимальний розв'язок
+        activeSet.append(Node(0, 0, 0, 0))
+        while activeSet:
+            for node in activeSet:
+                activeSet.remove(node)
+                for child in node.make_children(self.jobs_list, self.w_list, self.d_list, self.p_list):
 
+                    if Lower == 0:
+                        Lower = child.count_lower(self.jobs_list, self.p_list)
+                        depth = len(child.assigned_works)
 
-    def makeChildren(self, node):
-        children = []
-        freeJobsIndex = []
-        for i in self.jobsIndex:
-            for j in node:
-                if i != j:
-                    freeJobsIndex.append(i)
-                    break
-        print(freeJobsIndex)
-        # s = []
-        # for job in freeJobsIndex:
-        #     s = node + [job]
-        #     children.append(s)
-        #
-        # print(children)
+                    elif Lower < 0:
+                        raise ValueError
 
-        return children
+                    else:
+                        if depth == len(child.assigned_works):
+                            activeSet.append(child)
+                            if child.count_lower(self.jobs_list, self.p_list) < Lower:
+                                Lower = child.count_lower(self.jobs_list, self.p_list)
+                                currentOpt = child
+
+                        elif len(child.assigned_works) > depth:
+                            Lower = child.count_lower(self.jobs_list, self.p_list)
+                            currentOpt = child
+                            depth = len(child.assigned_works)
+                            activeSet.append(child)
+
+        print(currentOpt.assigned_works)

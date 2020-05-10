@@ -7,20 +7,20 @@ class Greedy:
         self.goalFunc = 0
         self.c = 0 #запізнення
 
-    def greedySearch(self):
+    def greedy_search(self):
         i = 0
         solution = []
         while (i != len(self.lateness)):
             currentIndex = self.lateness.index(min(self.lateness))
             solution.append(currentIndex + 1)
             self.c += self.p[currentIndex]
-            self.takeGoalFunc(currentIndex)
+            self.take_goal_func(currentIndex)
             self.lateness = list(map(lambda x: x - self.c, self.lateness))
             self.lateness[currentIndex] = 100000
             i = i + 1
         return solution
 
-    def takeGoalFunc(self, currentIndex):
+    def take_goal_func(self, currentIndex):
         T = max(0, self.c - self.d[currentIndex])
         self.goalFunc = self.goalFunc + T * self.w[currentIndex]
 

@@ -6,13 +6,13 @@ def main():
     d = [1, 4, 3, 8, 4, 6, 2]
     p = [1, 2, 2, 4, 3, 4, 1]
     data_outputG = Greedy(w, d, p)
-    greedyResult = data_outputG.greedySearch()
+    greedyResult = data_outputG.greedy_search()
 
     # print(greedyResult)
     # print(data_outputG.goalFunc)
 
     data_outputB = BranchAndBound(w, d, p)
-    bbmResult = data_outputB.bbm()
+    bbmResult = data_outputB.BBM()
 
 if __name__ == "__main__":
     main()
