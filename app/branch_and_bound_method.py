@@ -12,7 +12,7 @@ class BranchAndBound:
         activeSet = []
         solution = []
         Lower = 0 #нижня оцінка
-        depth = 0
+        depth = 0 #глибина вершини з поточною нижньою оцінкою
         currentOpt = 0 #поточний оптимальний розв'язок
         activeSet.append(Node(0, 0, 0, 0))
         while activeSet:
@@ -23,6 +23,8 @@ class BranchAndBound:
                     if Lower == 0:
                         Lower = child.count_lower(self.jobs_list, self.p_list)
                         depth = len(child.assigned_works)
+                        activeSet.append(child)
+                        currentOpt = child
 
                     elif Lower < 0:
                         raise ValueError
@@ -39,5 +41,19 @@ class BranchAndBound:
                             currentOpt = child
                             depth = len(child.assigned_works)
                             activeSet.append(child)
+                        else:
+                            if child.count_lower(self.jobs_list, self.p_list) > Lower:
+                                try:
+                                    activeSet.remove(child)
+                                except ValueError:
+                                    continue
+                            else:
+                                if child.count_lower(self.jobs_list, self.p_list) <= Lower:
+                                    # Lower = child.count_lower(self.jobs_list, self.p_list)
+                                    # currentOpt = child
+                                    # depth = len(child.assigned_works)
+                                    activeSet.append(child)
+
 
         print(currentOpt.assigned_works)
+        print(Lower)

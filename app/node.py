@@ -69,12 +69,17 @@ class Node:
         result = 0
         for job in self.freeJobsIndex(JobsIndex):
             result += timeList[job - 1]
+        result += self.p[0]
         return result
 
 
     def count_lower(self, JobsIndex, timeList):
         if self.parent != None:
-            Lower = (self.sum_of_duration(JobsIndex, timeList) - self.d[0]) * self.w[0] + self.parent.lower
+            sumOfAllTimes = self.sum_of_duration(JobsIndex, timeList) - self.d[0]
+            if sumOfAllTimes < 0:
+                Lower = self.parent.lower
+            else:
+                Lower = sumOfAllTimes * self.w[0] + self.parent.lower
         else:
             Lower = 0
         self.lower = Lower
