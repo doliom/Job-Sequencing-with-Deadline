@@ -8,9 +8,10 @@ class BranchAndBound:
         self.jobs_list = [i for i in range(1, len(w_list)+1)]
         self.lower = 0
 
+
+
     def BBM(self):
         activeSet = []
-        solution = []
         Lower = 0 #нижня оцінка
         depth = 0 #глибина вершини з поточною нижньою оцінкою
         currentOpt = 0 #поточний оптимальний розв'язок
@@ -49,11 +50,6 @@ class BranchAndBound:
                                     continue
                             else:
                                 if child.count_lower(self.jobs_list, self.p_list) <= Lower:
-                                    # Lower = child.count_lower(self.jobs_list, self.p_list)
-                                    # currentOpt = child
-                                    # depth = len(child.assigned_works)
                                     activeSet.append(child)
-
-
-        print(currentOpt.assigned_works)
-        print(Lower)
+        self.lower = Lower
+        return currentOpt.assigned_works

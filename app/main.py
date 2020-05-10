@@ -1,18 +1,42 @@
 from app.branch_and_bound_method import BranchAndBound
 from app.greedy_search import Greedy
+import csv
+
+def reader_csv():
+    with open('individual task.csv', newline='') as file:
+        reader = csv.reader(file, delimiter=';')
+        next(reader)
+        buffer = list(reader)
+        w = [int(item) for item in buffer[0]]
+        d = [int(item) for item in buffer[1]]
+        p = [int(item) for item in buffer[2]]
+        return w, d, p
+
+def choose_algo(w, d, p):
+    print("Choose method: ")
+    nameAlgo = input()
+    if nameAlgo == 'g':
+        data_outputG = Greedy(w, d, p)
+        greedyResult = data_outputG.greedy_search()
+        print(greedyResult)
+        print(data_outputG.goalFunc)
+    elif nameAlgo == 'b':
+        data_outputB = BranchAndBound(w, d, p)
+        bbmResult = data_outputB.BBM()
+        print(bbmResult)
+
+def choose_data():
+    print("How you want to give a data: ")
+    name = input()
+    if name == '0':
+        w, d, p = reader_csv()
+    else:
+        print("soon")
+    return w, d, p
 
 def main():
-    w = [2, 3, 5, 4, 1, 3, 2]
-    d = [1, 4, 3, 8, 4, 6, 2]
-    p = [1, 2, 2, 4, 3, 4, 1]
-    data_outputG = Greedy(w, d, p)
-    greedyResult = data_outputG.greedy_search()
-
-    # print(greedyResult)
-    # print(data_outputG.goalFunc)
-
-    data_outputB = BranchAndBound(w, d, p)
-    bbmResult = data_outputB.BBM()
+    w, d, p = choose_data()
+    choose_algo(w,d, p)
 
 if __name__ == "__main__":
     main()

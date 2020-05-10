@@ -98,17 +98,3 @@ class Node:
                                  timeList[job - 1],
                                  parent=self))
         return children
-
-
-
-
-
-
-
-
-
-    #
-    # def __eq__(self, other):
-    #     return (self.w == other.w and
-    #             self.d == other.d and
-    #             self.p == other.p)
