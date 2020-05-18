@@ -1,6 +1,7 @@
 from app.branch_and_bound_method import BranchAndBound
 from app.greedy_search import Greedy
 import csv
+from app.charts import draw_chart
 
 def reader_csv():
     with open('individual task.csv', newline='') as file:
@@ -20,10 +21,13 @@ def choose_algo(w, d, p):
         greedyResult = data_outputG.greedy_search()
         print(greedyResult)
         print(data_outputG.goalFunc)
+        return greedyResult
     elif nameAlgo == 'b':
         data_outputB = BranchAndBound(w, d, p)
         bbmResult = data_outputB.BBM()
         print(bbmResult)
+        return bbmResult
+
 
 def choose_data():
     print("How you want to give a data: ")
@@ -36,7 +40,8 @@ def choose_data():
 
 def main():
     w, d, p = choose_data()
-    choose_algo(w,d, p)
+    solution = choose_algo(w,d, p)
+    draw_chart(solution, p)
 
 if __name__ == "__main__":
     main()
