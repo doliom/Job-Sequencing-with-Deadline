@@ -1,4 +1,4 @@
-from app.node import Node
+from app.algorithms.node import Node
 
 class BranchAndBound:
     def __init__(self, w_list, d_list, p_list):

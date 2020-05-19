@@ -9963,6 +9963,7 @@ a.text-black:hover, a.text-black:focus {
   color: rgba(255, 255, 255, 0.5) !important;
 }
 
+
 .text-hide {
   font: 0/0 a;
   color: transparent;
@@ -10275,6 +10276,8 @@ body {
   letter-spacing: 0.15rem;
   border: 0;
 }
+
+
 
 .contact-section {
   padding-top: 5rem;
