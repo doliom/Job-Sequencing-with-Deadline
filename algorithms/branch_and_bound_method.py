@@ -1,4 +1,4 @@
-from app.algorithms.node import Node
+from algorithms.node import Node
 
 class BranchAndBound:
     def __init__(self, w_list, d_list, p_list):
@@ -7,8 +7,6 @@ class BranchAndBound:
         self.p_list = p_list
         self.jobs_list = [i for i in range(1, len(w_list)+1)]
         self.lower = 0
-
-
 
     def BBM(self):
         activeSet = []
@@ -52,4 +50,4 @@ class BranchAndBound:
                                 if child.count_lower(self.jobs_list, self.p_list) <= Lower:
                                     activeSet.append(child)
         self.lower = Lower
-        return currentOpt.assigned_works
+        return list(reversed(currentOpt.assigned_works))

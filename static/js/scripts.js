@@ -41,6 +41,19 @@
         offset: 100,
     });
 
+//
+//    $(function() {
+//    var el;
+//    $("#rng").change(function() {
+//    el = $(this);
+//    el
+//    .next("#ong")
+//    .text(el.val());
+//    })
+//    .trigger('change');
+//    });
+
+
     // Collapse Navbar
     var navbarCollapse = function () {
         if ($("#mainNav").offset().top > 100) {
