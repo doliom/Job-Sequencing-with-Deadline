@@ -152,12 +152,12 @@
                           {% for field in form %}
                             <div class="row">
                              <div class="input-group appsize">
-                              <div class="col-sm-4">
+                              <div class="col">
                               {{ field(class_="form-control") }}
                               </div>
                               {% if field.errors %}
                                 {% for error in field.errors %}
-                                  <div class="col-sm-3">
+                                  <div class="col">
                                     <div style="color: red;">{{ error }}</div>
                                   </div>
                                 {% endfor %}
@@ -166,7 +166,7 @@
                             </div>
                           {% endfor %}
                         <br/>
-                        <input type="submit" value="ОК" class="btn btn-primary mx-auto">
+                        <input type="submit" value="OK" class="btn btn-primary mx-auto">
                         </form>
 
                     </div>

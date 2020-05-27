@@ -22,7 +22,6 @@ def choose_algo(w, d, p, nameAlgo):
     except ValueError:
         print("uncorrect name of algorithm")
 
-
 def choose_data(fileName):
     try:
         w, d, p = reader_csv(fileName)
@@ -35,7 +34,6 @@ def fromFileFunc(fileName):
     j = [i for i in range(1, len(w)+1)]
     solutionG = choose_algo(w, d, p, 'g')
     solutionB = choose_algo(w, d, p, 'b')
-    # draw_chart(solution.BBM(), p)
     return j, w, d , p, solutionG.greedy_search(), solutionB.BBM(), solutionG.goalFunc, solutionB.lower
 
 def makeRandomList(a, b, num):
@@ -51,15 +49,25 @@ def randomFunc():
     d = makeRandomList(1, 20, jobsNum)
     p = makeRandomList(1, 10, jobsNum)
 
-    # print(w)
-    # print(d)
-    # print(p)
     solutionG = choose_algo(w, d, p, 'g')
     solutionB = choose_algo(w, d, p, 'b')
     j = [i for i in range(1, jobsNum+1)]
     return j, w, d , p, solutionG.greedy_search(), solutionB.BBM(), solutionG.goalFunc, solutionB.lower
 
+def onlineFunc(d_str, w_str, p_str):
+    d = list(map(int, d_str.split()))
+    w = list(map(int, w_str.split()))
+    p = list(map(int, p_str.split()))
 
+    slice = min(len(d), len(w), len(p))
+    d = d[:slice]
+    w = w[:slice]
+    p = p[:slice]
+
+    j = [i for i in range(1, len(w) + 1)]
+    solutionG = choose_algo(w, d, p, 'g')
+    solutionB = choose_algo(w, d, p, 'b')
+    return j, w, d, p, solutionG.greedy_search(), solutionB.BBM(), solutionG.goalFunc, solutionB.lower
 
 # rb = mainFunc(r'C:\Users\Darina\job-sequencing-with-deadline\app\static\task.csv', 'b')
 

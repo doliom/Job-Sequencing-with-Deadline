@@ -1,7 +1,7 @@
-from model import InputForm
+from model import InputFormOnline, InputForm
 from flask import Flask, render_template, request, redirect, url_for
 import os
-from algorithms.result import randomFunc, fromFileFunc
+from algorithms.result import randomFunc, fromFileFunc, onlineFunc
 
 app = Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -52,15 +52,35 @@ def index():
 
 @app.route('/online', methods=['GET', 'POST'])
 def online():
-    if request.method == 'POST':
-        return redirect(url_for('count'))
-    return render_template('online.html')
+    data = None
+    result = None
+    form = InputFormOnline(request.form)
+    if request.method == 'POST' and form.validate():
+        result = 'Ok'
+        j, w, d, p, solutionG, solutionB, goalG, goalB = onlineFunc(form.d.data, form.w.data, form.p.data)
 
-# @app.route('/count', methods=['GET', 'POST'])
+    else:
+        result = None
+        goalG, goalB, w, d, p, j, solutionG, solutionB = None, None, None, None, None, None, None, None
+
+    data = {"result": result,
+            "solutionG": solutionG,
+            "solutionB": solutionB,
+            "w": w,
+            "d": d,
+            "p": p,
+            "j": j,
+            "goalG": goalG,
+            "goalB": goalB}
+
+    return render_template('online.html',
+                           form=form, data=data)
+
+# @app.route('/online', methods=['GET', 'POST'])
 # def online():
 #     if request.method == 'POST':
 #         return redirect(url_for('count'))
-#     return render_template('count.html')
+#     return render_template('online.html')
 
 
 @app.route('/fromFile', methods=['GET', 'POST'])
@@ -94,6 +114,10 @@ def fromFile():
             "goalB": goalB}
 
     return render_template("fromfile.html", image_name=filename, data=data)
+
+
+
+
 
 
 if __name__ == '__main__':
