@@ -1,5 +1,5 @@
 import time
-from app.algorithms.result import *
+from algorithms.result import *
 
 def my_timer(f):
     def tmp(*args, **kwargs):
@@ -17,8 +17,11 @@ def my_sum():
     #
     # print(rаb.BBM())
     # print(rаb.lower)
-    sg = mainFunc(r'C:\Users\Darina\job-sequencing-with-deadline\app\static\individual_task_100.csv', 'g')
+    sg = fromFileFunc(r'C:\Users\Darina\job-sequencing-with-deadline\static\csv\individual_task_100.csv')
     print(sg.greedy_search())
     print(sg.goalFunc)
+
+    print(sg.BBM())
+    print(sg.Lower)
 
 print (my_sum())

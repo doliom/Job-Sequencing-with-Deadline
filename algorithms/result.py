@@ -69,9 +69,13 @@ def onlineFunc(d_str, w_str, p_str):
     solutionB = choose_algo(w, d, p, 'b')
     return j, w, d, p, solutionG.greedy_search(), solutionB.BBM(), solutionG.goalFunc, solutionB.lower
 
-# rb = mainFunc(r'C:\Users\Darina\job-sequencing-with-deadline\app\static\task.csv', 'b')
+def greedy_analysis_time( w, d, p):
+    solutionG = choose_algo(w, d, p, 'g')
+    solutionG.greedy_search()
 
-
-
-
+def bbm_analysis_time( w, d, p):
+    solutionB = choose_algo(w, d, p, 'b')
+    solutionB.BBM()
+#
+# fromFileFunc(r'C:\Users\Darina\job-sequencing-with-deadline\static\csv\test 100.csv')
 

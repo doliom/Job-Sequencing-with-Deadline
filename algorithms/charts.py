@@ -2,8 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-
-
 def draw_chart(jobs, time):
     p = sort_time(jobs, time)
     x = np.arange(1)
