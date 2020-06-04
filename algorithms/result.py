@@ -76,6 +76,13 @@ def greedy_analysis_time( w, d, p):
 def bbm_analysis_time( w, d, p):
     solutionB = choose_algo(w, d, p, 'b')
     solutionB.BBM()
-#
-# fromFileFunc(r'C:\Users\Darina\job-sequencing-with-deadline\static\csv\test 100.csv')
 
+def greedy_analysis_goal( w, d, p):
+    solutionG = choose_algo(w, d, p, 'g')
+    solutionG.greedy_search()
+    return solutionG.goalFunc
+
+def bbm_analysis_goal( w, d, p):
+    solutionB = choose_algo(w, d, p, 'b')
+    solutionB.BBM()
+    return solutionB.lower

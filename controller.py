@@ -1,4 +1,5 @@
 from model import InputFormOnline, InputForm
+from flask_googlecharts import GanttChart, GoogleCharts
 from flask import Flask, render_template, request, redirect, url_for
 import os
 from algorithms.result import randomFunc, fromFileFunc, onlineFunc
@@ -8,6 +9,7 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 from flask_bootstrap import Bootstrap
 Bootstrap(app)
+charts = GoogleCharts(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -44,7 +46,11 @@ def index():
             "p": p,
             "j": j,
             "goalG": goalG,
-            "goalB": goalB}
+            "goalB": goalB,
+            "iz_j": [1, 2, 3, 4, 5, 6, 7],
+            "iz_w": [2, 2, 5, 4, 1, 3, 2],
+            "iz_d": [1, 4, 3, 8, 4, 6, 2],
+            "iz_p": [1, 2, 2, 4, 3, 4, 1]}
 
     return render_template('index.html',
                            form=form,
